@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { registerUser } from './api';
 
 const App = () => {
@@ -17,6 +17,17 @@ const App = () => {
     setStatus({ type: 'error', msg: err.message });
   }
 };
+
+ // Clear result after 5 seconds
+  useEffect(() => {
+    if (!status) return;
+
+    const timer = setTimeout(() => {
+      setStatus(null);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [status]);
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
