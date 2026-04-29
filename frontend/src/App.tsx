@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
+import { registerUser } from './api';
 
 const App = () => {
   const [formData, setFormData] = useState({ username: '', email: '', dob: '' });
   const [status, setStatus] = useState<{ type: 'success' | 'error', msg: string } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus(null);
-    try {
-      const res = await fetch('http://localhost:3000/api/users/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setStatus({ type: 'success', msg: 'Successfully registered!' });
-        setFormData({ username: '', email: '', dob: '' });
-      } else {
-        throw new Error(data.error || 'Registration failed');
-      }
-    } catch (err: any) {
-      setStatus({ type: 'error', msg: err.message });
-    }
-  };
+  e.preventDefault();
+  setStatus(null);
+
+  try {
+    await registerUser(formData);
+    setStatus({ type: 'success', msg: 'Successfully registered!' });
+    setFormData({ username: '', email: '', dob: '' });
+  } catch (err: any) {
+    setStatus({ type: 'error', msg: err.message });
+  }
+};
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
