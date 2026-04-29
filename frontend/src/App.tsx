@@ -61,7 +61,7 @@ const App = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-3 px-4 rounded-xl hover:bg-indigo-700 active:scale-[0.98] transition-all font-bold shadow-lg shadow-indigo-100"
+            className="w-full bg-indigo-600 text-white py-3 px-4 rounded-xl hover:bg-indigo-700 active:scale-[0.98] transition-all font-bold shadow-lg shadow-indigo-100 cursor-pointer"
           >
             Save Information
           </button>
